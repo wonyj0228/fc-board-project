@@ -3,14 +3,8 @@ package com.fastcampus.boardproject.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -23,10 +17,9 @@ import java.util.Set;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
-@EntityListeners(AuditingEntityListener.class)
 // 검색기능이 빨라질 수 있도록 index 추가. 제목, 해시태그, 작성자, 작성시간에 따른 검색이 진행될 것이기 때문에.
 @Entity
-public class Article {
+public class Article extends AuditingFields{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //mysql 이기 때문에. auto increment 설정을 위함
     private Long id;
@@ -42,11 +35,7 @@ public class Article {
     //중복을 허용하지 않고 댓글리스트를 보려함
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
-    // 메타데이터
-    @CreatedDate @Column(nullable = false) private LocalDateTime createdAt; // 생성일시
-    @CreatedBy @Column(nullable = false, length = 100) private String createdBy; // 생성자
-    @LastModifiedDate @Column(nullable = false) private LocalDateTime modifiedAt; // 수정일시
-    @LastModifiedBy @Column(nullable = false, length = 100) private String modifiedBy; // 수정자
+
 
     // 기본생성자. 평소에는 open 하지 않을 것. entity는 private은 사용할 수 없음. 코드 밖에서 new로 생성 못하게.
     protected Article() {}
