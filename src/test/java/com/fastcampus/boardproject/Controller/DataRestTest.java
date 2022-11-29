@@ -1,5 +1,6 @@
 package com.fastcampus.boardproject.Controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Disabled("Spring Data REST 통합테스트는 불필요하므로 제외시킴")
 @DisplayName("Data Rest - API 테스트")
 @Transactional //실 DB에 영향이 되지 않도록 RollBack 기능이 있는 transactional. 반드시 spring 거로.
 @AutoConfigureMockMvc
