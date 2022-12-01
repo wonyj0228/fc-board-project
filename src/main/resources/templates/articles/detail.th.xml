@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#header" th:replace="header :: header" />  <!--sel = index.html의 태그속성. th:replace 대체. header.html의 header태그로 -->
+    <attr sel="#footer" th:replace="footer :: footer" />
+</thlogic>
