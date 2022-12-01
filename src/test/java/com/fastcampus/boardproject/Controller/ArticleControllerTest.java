@@ -45,7 +45,7 @@ class ArticleControllerTest {
         // When&Then
         mvc.perform(MockMvcRequestBuilders.get("/articles/1")) //해당 url로 get request를 하면
                 .andExpect(MockMvcResultMatchers.status().isOk()) //200 상태메세지와
-                .andExpect(content().contentType(MediaType.TEXT_HTML)) //html 컨텐트가 리턴되며
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML)) //html 컨텐트가 리턴되며
                 .andExpect(view().name("articles/detail"))
                 .andExpect(model().attributeExists("article")) //model에 atricle(단건) 키로 데이터가 넘어온다.
                 .andExpect(model().attributeExists("articleComments"));
@@ -59,7 +59,7 @@ class ArticleControllerTest {
         // When&Then
         mvc.perform(MockMvcRequestBuilders.get("/articles/search")) //해당 url로 get request를 하면
                 .andExpect(MockMvcResultMatchers.status().isOk()) //200 상태메세지와
-                .andExpect(content().contentType(MediaType.TEXT_HTML)) //html 컨텐트가 리턴되며
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML)) //html 컨텐트가 리턴되며
                 .andExpect(model().attributeExists("articles/search"));
 
     }
@@ -72,7 +72,7 @@ class ArticleControllerTest {
         // When&Then
         mvc.perform(MockMvcRequestBuilders.get("/articles/search-hashtag")) //해당 url로 get request를 하면
                 .andExpect(MockMvcResultMatchers.status().isOk()) //200 상태메세지와
-                .andExpect(content().contentType(MediaType.TEXT_HTML)) //html 컨텐트가 리턴되며
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML)) //html 컨텐트가 리턴되며
                 .andExpect(model().attributeExists("articles/hash-tag"));
     }
 }
