@@ -30,8 +30,37 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
+
+    //queryDSL 설정
+    implementation "com.querydsl:querydsl-jpa" //querydsl도 spring dependency management가 관리해주는 영역에 포함. 버전 기재 x
+    implementation "com.querydsl:querydsl-core"
+    implementation "com.querydsl:querydsl-collections" //collections은 없어도 기본적인 동작하지만 추후에 필요할 수도 있어서 추가.
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+    //queryDSL의 버전을 dependencyManagement가 알고있기 때문에 importedProperties를 통해 버전을 가져오게 할 수 았음. 해당문법은 gradle
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api:"// java.lang.NoClassDefFoundError (javax.annotation.Generated) 대응코드
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:"// java.lang.NoClassDefFoundError (javax.annotation.Entity) 대응코드
+
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// IntelliJ IDE 사용시 build 할 때 충돌될 수 있어서 파일을 따로 분리
+//QueryDSL 설정부
+def generated = 'src/main/generated' // 파일 경로
+
+// queryDSL QClass 파일 생성 위치를 지정
+tasks.withType(JavaCompile) {
+    options.getGeneratedSourceOutputDirectory().set(file(generated))
+}
+
+// java source set 에 queryDSL QClass 위치 추가
+sourceSets {
+    main.java.srcDirs += [generated]
+}
+
+// gradle clean 시에 QClass 디렉토리 삭제
+clean {
+    delete file(generated)
 }

@@ -74,6 +74,7 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+
 # Editor-based Rest Client
 .idea/httpRequests
 
@@ -83,6 +84,9 @@ fabric.properties
 ### Intellij+all Patch ###
 # Ignore everything but code style settings and run configurations
 # that are supposed to be shared within teams.
+
+# Querydsl
+src/main/generated
 
 .idea/*
 
