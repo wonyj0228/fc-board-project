@@ -31,6 +31,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     //queryDSL 설정
     implementation "com.querydsl:querydsl-jpa" //querydsl도 spring dependency management가 관리해주는 영역에 포함. 버전 기재 x
