@@ -24,7 +24,6 @@ class ArticleControllerTest {
     public ArticleControllerTest(@Autowired MockMvc mvc) {
         this.mvc = mvc;
     }
-    @Disabled("구현중")
     @DisplayName("[view][GET] 게시글 리스트 (게시판) 페이지 - 정상 호출")
     @Test
     public void givenNothing_whenRequestingArticlesView_thenReturnsArticlesView() throws Exception {
@@ -33,7 +32,7 @@ class ArticleControllerTest {
         // When&Then
         mvc.perform(MockMvcRequestBuilders.get("/articles")) //해당 url로 get request를 하면
                 .andExpect(MockMvcResultMatchers.status().isOk()) //200 상태메세지와
-                .andExpect(content().contentType(MediaType.TEXT_HTML)) //html 컨텐트가 리턴되며
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML)) //html 컨텐트가 리턴되며 UTF-8 때문에 compatible로.
                 .andExpect(view().name("articles/index"))
                 .andExpect(model().attributeExists("articles")); //model에 atricles 키로 데이터가 넘어온다.
     }
