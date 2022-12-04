@@ -1,11 +1,13 @@
 package com.fastcampus.boardproject.Controller;
 
+import com.fastcampus.boardproject.config.SecurityConfig;
 import com.fastcampus.boardproject.controller.ArticleController;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -15,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @DisplayName("View 컨트롤러 - 게시글")
+@Import(SecurityConfig.class) //인증이 없는 상태로 테스트하고싶어서.
 @WebMvcTest(ArticleController.class) //WebMvcTest는 모든 컨트롤러를 불러오는데 해당 컨트롤러만 테스트가능
 class ArticleControllerTest {
 
